@@ -40,6 +40,7 @@ export default class SortingVisualiser extends React.Component {
     }
 
     mergeSort() {
+        this.disableButtons(document.getElementsByClassName("interaction-button"));
         const animations = sortingFunctions.mergeSort(this.state.array);
         const bars = document.getElementsByClassName("array-bar");
         for (let i = 0; i < animations.length; i++) {
@@ -64,6 +65,7 @@ export default class SortingVisualiser extends React.Component {
     }
 
     quickSort() {
+        this.disableButtons(document.getElementsByClassName("interaction-button"));
         const animations = sortingFunctions.quickSort(this.state.array);
         const bars = document.getElementsByClassName("array-bar");
         for (let i = 0; i < animations.length; i++) {
@@ -102,6 +104,7 @@ export default class SortingVisualiser extends React.Component {
     }
 
     selectionSort() {
+        this.disableButtons(document.getElementsByClassName("interaction-button"));
         const animations = sortingFunctions.selectionSort(this.state.array);
         const bars = document.getElementsByClassName("array-bar");
         for (let i = 0; i < animations.length; i++) {
@@ -127,9 +130,13 @@ export default class SortingVisualiser extends React.Component {
                 }, i * 3);
             }
         }
+        setTimeout(() => {
+            this.enableButtons(document.getElementsByClassName("interaction-button"));
+        }, animations.length * 3);
     }
 
     bubbleSort() {
+        this.disableButtons(document.getElementsByClassName("interaction-button"));
         const animations = sortingFunctions.bubbleSort(this.state.array);
         const bars = document.getElementsByClassName("array-bar");
         for (let i = 0; i < animations.length; i++) {
@@ -160,9 +167,13 @@ export default class SortingVisualiser extends React.Component {
                 }
             }
         }
+        setTimeout(() => {
+            this.enableButtons(document.getElementsByClassName("interaction-button"));
+        }, animations.length * 3);
     }
 
     insertionSort() {
+        this.disableButtons(document.getElementsByClassName("interaction-button"));
         const animations = sortingFunctions.insertionSort(this.state.array);
         const bars = document.getElementsByClassName("array-bar");
         for (let i = 0; i < animations.length; i++) {
@@ -198,6 +209,21 @@ export default class SortingVisualiser extends React.Component {
             setTimeout(() => {
                 bar.style.backgroundColor = "lightgreen";
             }, i * 3);
+        }
+        setTimeout(() => {
+            this.enableButtons(document.getElementsByClassName("interaction-button"));
+        }, bars.length * 3);
+    }
+
+    disableButtons(buttons) {
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = true;
+        }
+    }
+
+    enableButtons(buttons) {
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = false;
         }
     }
 
